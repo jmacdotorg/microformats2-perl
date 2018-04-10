@@ -133,9 +133,9 @@ Web::Microformats2::Document - A parsed Microformats2 data structure
 
 An object of this class represents a Microformats2 data structure that has been either parsed from an HTML document or deserialized from JSON.
 
-The expected use-case is that you will construct document objects either via the "parse" method of L<Web::Microformats2::Parse>, or by this class's "new_from_json" method. Once constructed, we expect you to treat documents as read-only.
+The expected use-case is that you will construct document objects either via the "parse" method of Web::Microformats2::Parse, or by this class's "new_from_json" method. Once constructed, we expect you to treat documents as read-only.
 
-See L<Web::Microformats2> for further context and purpose.
+See Web::Microformats2 for further context and purpose.
 
 =head1 METHODS
 
@@ -155,11 +155,11 @@ Given a JSON string containing a properly serialized Microformats2 data structur
 
 =item all_top_level_items ( )
 
-Returns a list of all L<Web::Microformats2::Item> objects this document contains at the top level.
+Returns a list of all Web::Microformats2::Item objects this document contains at the top level.
 
 =item all_items ( )
 
-Returns a list of all L<Web::Microformats2::Item> objects this document contains at I<any> level.
+Returns a list of all Web::Microformats2::Item objects this document contains at I<any> level.
 
 =item get_first ( $item_type )
 

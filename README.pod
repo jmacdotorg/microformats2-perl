@@ -36,15 +36,15 @@ See L<"ABOUT MICROFORMATS">, below, for arguments about why this might be intere
 
 =over
 
-=item L<Web::Microformats2::Parser>
+=item Web::Microformats2::Parser
 
 Parses HTML for Microformats2 metadata. Returns what it finds as a Web::Microformats2::Document object.
 
-=item L<Web::Microformats2::Document>
+=item Web::Microformats2::Document
 
 Objects are queryable structures of parsed Microformats2 metadata. Each came either fresh from HTML, or re-inflated from its JSON serialization format.
 
-=item L<Web::Microformats2::Item>
+=item Web::Microformats2::Item
 
 Each document object contains one or more objects of this class. Each item represents a single, "h-"prefixed microformat substructure, defining what we in the Perl world might call some I<thingy>: an article, a person, an invitation, and so on. Each item has some number of properties, and possibly a parent item and a list of child items.
 

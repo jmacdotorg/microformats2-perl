@@ -554,7 +554,7 @@ Web::Microformats2::Parser - Read Microformats2 information from HTML
 
 An object of this class represents a Microformats2 parser.
 
-See L<Web::Microformats2> for further context and purpose.
+See Web::Microformats2 for further context and purpose.
 
 =head1 METHODS
 
@@ -574,7 +574,7 @@ Returns a parser object.
 
 =item parse ( $html )
 
-Pass in a string containing HTML which itself contains Microformats2 metadata, and receive a L<Web::Microformats2::Document> object in return.
+Pass in a string containing HTML which itself contains Microformats2 metadata, and receive a Web::Microformats2::Document object in return.
 
 =back
 
