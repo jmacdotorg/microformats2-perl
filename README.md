@@ -1,11 +1,10 @@
-=pod
+# microformats2-perl
 
-=head1 NAME
+These Perl libraries let you read Microformats2 metadata from HTML or JSON.
 
-Web::Microformats2 - Read Microformats2 metadata from HTML or JSON
+## Synopsis
 
-=head1 SYNOPSIS
-
+```
  use Web::Microformats2;
 
  my $mf2_parser = Web::Microformats2::Parser->new;
@@ -25,38 +24,35 @@ Web::Microformats2 - Read Microformats2 metadata from HTML or JSON
  my $other_mf2_doc = Web::Microformats2::Document->new_from_json(
     $serialized_mf2_doc_from_somehwere_else
  );
+```
 
-=head1 DESCRIPTION
+## Description
 
 The Web::Microformats2 modules provide Perl programs with a way to parse and analyze HTML documents containing Microformats2 metadata. They can pull Microformats2 information from a given HTML document, representing it as a queryable in-memory object. They can also serialize this object as JSON (using the Microformats2 rules for this), or read an already JSON-serialized Microformats2 structure for further analysis.
 
-See L<"ABOUT MICROFORMATS">, below, for arguments about why this might be interesting to you.
+See "About Microformats2", below, for arguments about why this might be interesting to you.
 
-=head1 CLASSES
+## Classes
 
-=over
-
-=item Web::Microformats2::Parser
+* Web::Microformats2::Parser
 
 Parses HTML for Microformats2 metadata. Returns what it finds as a Web::Microformats2::Document object.
 
-=item Web::Microformats2::Document
+* Web::Microformats2::Document
 
 Objects are queryable structures of parsed Microformats2 metadata. Each came either fresh from HTML, or re-inflated from its JSON serialization format.
 
-=item Web::Microformats2::Item
+* Web::Microformats2::Item
 
-Each document object contains one or more objects of this class. Each item represents a single, "h-"prefixed microformat substructure, defining what we in the Perl world might call some I<thingy>: an article, a person, an invitation, and so on. Each item has some number of properties, and possibly a parent item and a list of child items.
+Each document object contains one or more objects of this class. Each item represents a single, "h-"prefixed microformat substructure, defining what we in the Perl world might call some _thingy_: an article, a person, an invitation, and so on. Each item has some number of properties, and possibly a parent item and a list of child items.
 
-=back
+## Project status
 
-=head1 STATUS
+These modules are **alpha**. Their developer is still figuring out how they want to be used, and their interface may change dramatically. It's not ready for CPAN just yet. This software is currently being "dogfooded" on an experimental branch of the author's own essay blog.
 
-These modules are B<alpha>. Their developer is still figuring out how they want to be used, and their interface may change dramatically. It's not ready for CPAN just yet. This software is currently being "dogfooded" on an experimental branch of the author's own essay blog.
+Further, the parser implementation is incomplete. The HTML and JSON documents found in t/microformats-v2 include the full Microformats2 parser test suite found at https://github.com/microformats/tests, as of early April, 2018. The parser-test program in t/parser.pl marks a great deal of these tests as TODO. (But fewer than half of them, for all that, so hey.)
 
-Further, the parser implementation is incomplete. The HTML and JSON documents found in t/microformats-v2 include the full Microformats2 parser test suite found at L<https://github.com/microformats/tests>, as of early April, 2018. The parser-test program in t/parser.pl marks a great deal of these tests as TODO. (But fewer than half of them, for all that, so hey.)
-
-=head1 ABOUT MICROFORMATS2
+## About Microformats2
 
 Microformats2 allows the attachment of semantic metadata to arbitrary HTML elements, in a way that neither hinders the human readability of the underlying HTML document nor strictly prescribes any set vocabulary to this metadata.
 
@@ -66,8 +62,12 @@ A Microfomats2 parser can read these special attribute values -- identifiable by
 
 Microformats2 is the successor to Microformats. While similar in intent and execution, their implementations are very different. Rather than using the pre-defined vocabularies of its predecessor, Microformats2 uses a relatively simple set of rules that allow for limitless user-definable labels for metadata items and their constituent properties.
 
-For more information about Microformats2, please see L<http://microformats.org/wiki/microformats2>.
+For more information about Microformats2, please see http://microformats.org/wiki/microformats2.
 
-=head1 AUTHOR
+## Author
 
 Jason McIntosh (jmac@jmac.org)
+
+## Other contributors
+
+The tests found in `t/microformats-v2` are based on prior work by the Microformats community, canonically stored at https://github.com/microformats/tests/tree/master/tests/microformats-v2.
