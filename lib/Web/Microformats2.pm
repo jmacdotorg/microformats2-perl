@@ -1,6 +1,5 @@
 package Web::Microformats2;
 
-use Web::Microformats2;
 use Web::Microformats2::Parser;
 use Web::Microformats2::Document;
 
