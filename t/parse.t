@@ -80,7 +80,7 @@ sub handle_file {
         $file->dir, "$main.json"
     );
 
-    my $html = $file->slurp;
+    my $html = $file->slurp(iomode => '<:encoding(UTF-8)');
 
     my $candidate = decode_json($parser->parse( $html )->as_json);
     my $target = decode_json($json_file->slurp);
