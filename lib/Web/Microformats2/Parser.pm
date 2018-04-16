@@ -574,7 +574,8 @@ Returns a parser object.
 
 =item parse ( $html )
 
-Pass in a string containing HTML which itself contains Microformats2 metadata, and receive a Web::Microformats2::Document object in return.
+Pass in a string containing HTML which itself contains Microformats2
+metadata, and receive a Web::Microformats2::Document object in return.
 
 =back
 

@@ -131,9 +131,13 @@ Web::Microformats2::Document - A parsed Microformats2 data structure
 
 =head1 DESCRIPTION
 
-An object of this class represents a Microformats2 data structure that has been either parsed from an HTML document or deserialized from JSON.
+An object of this class represents a Microformats2 data structure that
+has been either parsed from an HTML document or deserialized from JSON.
 
-The expected use-case is that you will construct document objects either via the "parse" method of Web::Microformats2::Parse, or by this class's "new_from_json" method. Once constructed, we expect you to treat documents as read-only.
+The expected use-case is that you will construct document objects either
+via the "parse" method of Web::Microformats2::Parse, or by this class's
+"new_from_json" method. Once constructed, we expect you to treat
+documents as read-only.
 
 See Web::Microformats2 for further context and purpose.
 
@@ -145,7 +149,8 @@ See Web::Microformats2 for further context and purpose.
 
 =item new_from_json ( $json_string )
 
-Given a JSON string containing a properly serialized Microformats2 data structure, returns a Web::Microformats2::Document object.
+Given a JSON string containing a properly serialized Microformats2 data
+structure, returns a Web::Microformats2::Document object.
 
 =back
 
@@ -155,15 +160,19 @@ Given a JSON string containing a properly serialized Microformats2 data structur
 
 =item all_top_level_items ( )
 
-Returns a list of all Web::Microformats2::Item objects this document contains at the top level.
+Returns a list of all Web::Microformats2::Item objects this document
+contains at the top level.
 
 =item all_items ( )
 
-Returns a list of all Web::Microformats2::Item objects this document contains at I<any> level.
+Returns a list of all Web::Microformats2::Item objects this document
+contains at I<any> level.
 
 =item get_first ( $item_type )
 
-Given a Microformats2 item-type string -- e.g. "h-entry" (or just "entry") -- returns the first item of that type that this document contains (in document order, depth-first).
+Given a Microformats2 item-type string -- e.g. "h-entry" (or just
+"entry") -- returns the first item of that type that this document
+contains (in document order, depth-first).
 
 =back
 

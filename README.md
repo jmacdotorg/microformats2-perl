@@ -22,7 +22,7 @@ These Perl libraries let you read Microformats2 metadata from HTML or JSON.
  my $serialized_mf2_doc = $mf2_doc->as_json;
 
  my $other_mf2_doc = Web::Microformats2::Document->new_from_json(
-    $serialized_mf2_doc_from_somehwere_else
+    $serialized_mf2_doc_from_somewhere_else
  );
 ```
 

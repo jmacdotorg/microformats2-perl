@@ -112,9 +112,15 @@ Web::Microformats2::Item - A parsed Microformats2 item
 
 =head1 DESCRIPTION
 
-An object of this class represents a Microformats2 item, contained within a larger, parsed Microformats2 data structure. An item represents a single semantically meaningful something-or-other: an article, a person, a photograph, et cetera.
+An object of this class represents a Microformats2 item, contained
+within a larger, parsed Microformats2 data structure. An item represents
+a single semantically meaningful something-or-other: an article, a
+person, a photograph, et cetera.
 
-The expected use-case is that you will never directly construct items, but rather query them through the methods provided by this class and related ones, once you have constructed a document object via parsing HTML or deserializing some JSON.
+The expected use-case is that you will never directly construct items,
+but rather query them through the methods provided by this class and
+related ones, once you have constructed a document object via parsing
+HTML or deserializing some JSON.
 
 See L<Web::Microformats2> for further context and purpose.
 
@@ -122,21 +128,27 @@ See L<Web::Microformats2> for further context and purpose.
 
 =head2 Object Methods
 
-Only read-only methods are described here, on the argument that this object represents an item defined elsewhere and therefore manipulating its contents doesn't really represent a meaningful activity.
+Only read-only methods are described here, on the argument that this
+object represents an item defined elsewhere and therefore manipulating
+its contents doesn't really represent a meaningful activity.
 
 =over
 
 =item get_properties ( $property_key )
 
-Returns a list reference of all property values identified by the given key. Values can be strings, unblessed references, or more item objects.
+Returns a list reference of all property values identified by the given
+key. Values can be strings, unblessed references, or more item objects.
 
-Note that Microformats2 stores its properties' key without their prefixes, so that's how you should query for them here. In order words, pass in "name" or "url" as an argument, not "p-name" or "u-url".
+Note that Microformats2 stores its properties' key without their
+prefixes, so that's how you should query for them here. In order words,
+pass in "name" or "url" as an argument, not "p-name" or "u-url".
 
 =item get_property ( $property_key )
 
 Returns the first property value identified by the given key.
 
-If this item contains more than one such value, the object will also emit a warning.
+If this item contains more than one such value, the object will also
+emit a warning.
 
 =item value ( )
 
@@ -144,13 +156,18 @@ Returns the special C<value> attribute, if this item has it defined.
 
 =item types ( )
 
-Returns a list reference to all the types that this item identifies as. Guaranteed to contain at least one value.
+Returns a list reference to all the types that this item identifies as.
+Guaranteed to contain at least one value.
 
-Note that each member of the list is the type without its original prefix, so e.g. "entry" and "card" and not "h-entry" and "h-card". I<This behavior might change in near-future versions.>
+Note that each member of the list is the type without its original
+prefix, so e.g. "entry" and "card" and not "h-entry" and "h-card".
+I<This behavior might change in near-future versions.>
 
 =item has_type ( $type )
 
-Returns true if the item claims to be of the given type, false otherwise. (The argument can include a prefix, so e.g. both "entry" and "h-entry" return the same result here.)
+Returns true if the item claims to be of the given type, false
+otherwise. (The argument can include a prefix, so e.g. both "entry" and
+"h-entry" return the same result here.)
 
 =item parent ( )
 
