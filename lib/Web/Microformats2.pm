@@ -50,18 +50,18 @@ be interesting to you.
 
 =over
 
-=item Web::Microformats2::Parser
+=item L<Web::Microformats2::Parser>
 
 Parses HTML for Microformats2 metadata. Returns what it finds as a
 Web::Microformats2::Document object.
 
-=item Web::Microformats2::Document
+=item L<Web::Microformats2::Document>
 
 Objects are queryable structures of parsed Microformats2 metadata. Each
 came either fresh from HTML, or re-inflated from its JSON serialization
 format.
 
-=item Web::Microformats2::Item
+=item L<Web::Microformats2::Item>
 
 Each document object contains one or more objects of this class. Each
 item represents a single, "h-"prefixed microformat substructure,
@@ -123,3 +123,11 @@ L<http://microformats.org/wiki/microformats2>.
 =head1 AUTHOR
 
 Jason McIntosh (jmac@jmac.org)
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2018 by Jason McIntosh.
+
+This is free software, licensed under:
+
+  The MIT (X11) License

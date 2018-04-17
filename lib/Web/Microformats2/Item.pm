@@ -117,10 +117,11 @@ within a larger, parsed Microformats2 data structure. An item represents
 a single semantically meaningful something-or-other: an article, a
 person, a photograph, et cetera.
 
-The expected use-case is that you will never directly construct items,
-but rather query them through the methods provided by this class and
-related ones, once you have constructed a document object via parsing
-HTML or deserializing some JSON.
+The expected use-case is that you will never directly construct item
+objects. Instead, your code will receive item objects by querying a
+L<Web::Microformats2::Document> instance, itself created by running
+Microformats2-laden HTML or JSON through a L<Web::Microformats2::Parser>
+object.
 
 See L<Web::Microformats2> for further context and purpose.
 
@@ -128,33 +129,45 @@ See L<Web::Microformats2> for further context and purpose.
 
 =head2 Object Methods
 
-Only read-only methods are described here, on the argument that this
-object represents an item defined elsewhere and therefore manipulating
-its contents doesn't really represent a meaningful activity.
+=head3 get_properties
 
-=over
+ $properties_ref = $item->get_properties( $property_key )
 
-=item get_properties ( $property_key )
+ # To get all "u-url" properties of this item:
+ $urls = $item->get_properties( 'url' );
+ # To get all "p-name" properties:
+ $names = $item->get_properties( 'name' );
 
 Returns a list reference of all property values identified by the given
 key. Values can be strings, unblessed references, or more item objects.
 
-Note that Microformats2 stores its properties' key without their
+Note that Microformats2 stores its properties' keys without their
 prefixes, so that's how you should query for them here. In order words,
 pass in "name" or "url" as an argument, not "p-name" or "u-url".
 
-=item get_property ( $property_key )
+=head3 get_property
 
-Returns the first property value identified by the given key.
+ $property_value = $item->get_property( $property_key );
 
-If this item contains more than one such value, the object will also
-emit a warning.
+ # To get the first (and maybe only?) "u-url" property of this item:
+ $url = $item->get_property( 'url' );
+ # To get its "p-name" property:
+ $name = $item->get_property( 'name' );
 
-=item value ( )
+Like L<"get_properties">, but returns only the first property value identified
+by the given key.
+
+If this item contains more than one such value, this will also emit a warning.
+
+=head3 value
+
+ $value = $item->value;
 
 Returns the special C<value> attribute, if this item has it defined.
 
-=item types ( )
+=head3 types
+
+ $types_ref = $item->types;
 
 Returns a list reference to all the types that this item identifies as.
 Guaranteed to contain at least one value.
@@ -163,22 +176,34 @@ Note that each member of the list is the type without its original
 prefix, so e.g. "entry" and "card" and not "h-entry" and "h-card".
 I<This behavior might change in near-future versions.>
 
-=item has_type ( $type )
+=head3 has_type
+
+ $bool = $item->has_type( $type )
 
 Returns true if the item claims to be of the given type, false
 otherwise. (The argument can include a prefix, so e.g. both "entry" and
 "h-entry" return the same result here.)
 
-=item parent ( )
+=head3 parent
+
+ $parent = $item->parent;
 
 Returns this item's parent item, if set.
 
-=item children ( )
+=head3 children
 
-Returns a list of child items.
+ $children_ref = $item->children;
 
-=back
+Returns a list reference of child items.
 
 =head1 AUTHOR
 
 Jason McIntosh (jmac@jmac.org)
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2018 by Jason McIntosh.
+
+This is free software, licensed under:
+
+  The MIT (X11) License

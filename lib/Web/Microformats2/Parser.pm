@@ -554,31 +554,35 @@ Web::Microformats2::Parser - Read Microformats2 information from HTML
 
 An object of this class represents a Microformats2 parser.
 
-See Web::Microformats2 for further context and purpose.
+See L<Web::Microformats2> for further context and purpose.
 
 =head1 METHODS
 
 =head2 Class Methods
 
-=over
+=head3 new
 
-=item new ( )
+ $parser = Web::Microformats2::Parser->new;
 
 Returns a parser object.
 
-=back
-
 =head2 Object Methods
 
-=over
+=head3 parse
 
-=item parse ( $html )
+ $doc = $parser->parse( $html );
 
 Pass in a string containing HTML which itself contains Microformats2
-metadata, and receive a Web::Microformats2::Document object in return.
-
-=back
+metadata, and receive a L<Web::Microformats2::Document> object in return.
 
 =head1 AUTHOR
 
 Jason McIntosh (jmac@jmac.org)
+
+=head1 COPYRIGHT AND LICENSE
+
+This software is Copyright (c) 2018 by Jason McIntosh.
+
+This is free software, licensed under:
+
+  The MIT (X11) License
