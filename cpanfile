@@ -2,11 +2,15 @@ requires "DateTime::Format::ISO8601";
 requires "HTML::Entities";
 requires "HTML::TreeBuilder::XPath";
 requires "JSON";
-requires "List::Util";
 requires "Moose";
 requires "MooseX::Types::URI";
-requires "Path::Class::Dir";
 requires "Readonly";
 requires "Scalar::Util";
-requires "Test::Deep";
-requires "Test::More";
+
+on 'test' => sub {
+    requires "Test::Deep";
+    requires "Test::More";
+
+    requires "List::Util";
+    requires "Path::Class::Dir";
+};
