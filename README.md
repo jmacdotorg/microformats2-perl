@@ -6,6 +6,7 @@ These Perl libraries let you read Microformats2 metadata from HTML or JSON.
 
 ```
  use Web::Microformats2;
+ use v5.10;
 
  my $mf2_parser = Web::Microformats2::Parser->new;
  my $mf2_doc    = $mf2_parser->parse( $string_full_of_tasty_html );
@@ -13,10 +14,10 @@ These Perl libraries let you read Microformats2 metadata from HTML or JSON.
  for my $item ( $mf2_doc->all_top_level_items ) {
     # Each $item is a Web::Microformats2::Item object.
     my $types_ref = $item->types;
-    print "I see an MF2 item with these types set: @$types_ref\n";
+    say "I see an MF2 item with these types set: @$types_ref";
 
     my $name = $item->get_property( 'name' );
-    print "The value of the item's 'name' property is: '$name'\n";
+    say "The value of the item's 'name' property is: '$name'";
  }
 
  my $serialized_mf2_doc = $mf2_doc->as_json;
