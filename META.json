@@ -63,6 +63,17 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/jmacdotorg/microformats2-perl/issues"
+      },
+      "homepage" : "https://github.com/jmacdotorg/microformats2-perl",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/jmacdotorg/microformats2-perl.git",
+         "web" : "https://github.com/jmacdotorg/microformats2-perl"
+      }
+   },
    "version" : "0.01",
    "x_contributors" : [
       "Jason McIntosh <jmac@jmac.org>"
