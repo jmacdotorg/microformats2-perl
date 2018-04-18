@@ -58,6 +58,12 @@ sub as_json {
     return JSON->new->convert_blessed->pretty->utf8->encode( $data_for_json );
 }
 
+sub as_raw_data {
+    my $self = shift;
+
+    return decode_json( $self->as_json );
+}
+
 sub new_from_json {
     my $class = shift;
 
@@ -154,12 +160,28 @@ structure, returns a L<Web::Microformats2::Document> object.
 
 =head2 Object Methods
 
-=head3 all_top_level_items
+=head3 as_json
 
- @items = $doc->all_top_level_items;
+ $json = $doc->as_json
 
-Returns a list of all L<Web::Microformats2::Item> objects this document
-contains at the top level.
+Returns a JSON representation of this object, created according to
+Microformats2 serialization rules.
+
+=head3 as_raw_data
+
+ $mf2_data_ref = $doc->as_raw_data
+
+Returns a hash reference containing unblessed data structures that map
+exactly to the JSON version of this object, as defined by Microformats2
+serialization rules. In other words, it contains C<items>, C<rels>, and
+C<rel-urls> keys, and builds down from there.
+
+Call this if you'd like to parse the Microformats2 metadata out of a
+document and then work with it at low level, as opposed to (or as well
+as) using the various convenience methods offered by this class.
+
+Equivalent to calling C<decode_json()> (see L<JSON/decode_json>) on the
+output of C<as_json>.
 
 =head3 all_items
 
@@ -167,6 +189,13 @@ contains at the top level.
 
 Returns a list of all L<Web::Microformats2::Item> objects this document
 contains at I<any> level.
+
+=head3 all_top_level_items
+
+ @items = $doc->all_top_level_items;
+
+Returns a list of all L<Web::Microformats2::Item> objects this document
+contains at the top level.
 
 =head3 get_first
 

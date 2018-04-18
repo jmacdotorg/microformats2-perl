@@ -48,4 +48,7 @@ ok (defined ($item->get_property('content')->{value}),
 ok ($item->get_property('author')->has_type('h-card'),
     'Item has a correctly nested sub-item');
 
+my $raw_doc = $doc->as_raw_data;
+is ($raw_doc->{items}->[0]->{type}->[0], 'h-entry', 'Raw data looks good.');
+
 done_testing();
