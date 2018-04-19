@@ -61,9 +61,7 @@ be interesting to you.
 # STATUS
 
 These modules are **alpha**. Their developer is still figuring out how
-they want to be used, and their interface may change dramatically. It's
-not ready for CPAN just yet. This software is currently being
-"dogfooded" on an experimental branch of the author's own essay blog.
+they want to be used, and their interface may change dramatically.
 
 Further, the parser implementation is incomplete. The HTML and JSON
 documents found in t/microformats-v2 include the full Microformats2
@@ -106,6 +104,13 @@ properties.
 
 For more information about Microformats2, please see
 [http://microformats.org/wiki/microformats2](http://microformats.org/wiki/microformats2).
+
+# SUPPORT
+
+To file issues or submit pull requests, please see [this module's
+repository on GitHub](https://github.com/jmacdotorg/microformats2-perl).
+
+The author also welcomes any direct questions about this module via email.
 
 # AUTHOR
 

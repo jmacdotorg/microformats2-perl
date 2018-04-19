@@ -122,6 +122,13 @@ properties.
 For more information about Microformats2, please see
 L<http://microformats.org/wiki/microformats2>.
 
+=head1 SUPPORT
+
+To file issues or submit pull requests, please see L<this module's
+repository on GitHub|https://github.com/jmacdotorg/microformats2-perl>.
+
+The author also welcomes any direct questions about this module via email.
+
 =head1 AUTHOR
 
 Jason McIntosh (jmac@jmac.org)
