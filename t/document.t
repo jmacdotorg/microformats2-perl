@@ -48,6 +48,12 @@ ok (defined ($item->get_property('content')->{value}),
 ok ($item->get_property('author')->has_type('h-card'),
     'Item has a correctly nested sub-item');
 
+my @types = $item->all_types;
+is (scalar @types, 1, 'all_types: Correct number of types.');
+is ($types[0], 'h-entry', 'all_types: Correct type value.');
+my @short_types = $item->all_types( no_prefixes => 1 );
+is ($short_types[0], 'entry', 'all_types: Correct short-type value.');
+
 my $raw_doc = $doc->as_raw_data;
 is ($raw_doc->{items}->[0]->{type}->[0], 'h-entry', 'Raw data looks good.');
 

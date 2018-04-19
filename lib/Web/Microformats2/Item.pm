@@ -85,6 +85,20 @@ sub has_type {
     return $self->find_type( sub { $_ eq $type } );
 }
 
+sub all_types {
+    my $self = shift;
+    my ( %args ) = @_;
+
+    my @types = @{ $self->types };
+
+    # We add the 'h-' prefix to returned types unless told not to.
+    unless ( $args{ 'no_prefixes' } ) {
+        @types = map { "h-$_" } @types;
+    }
+
+    return @types;
+}
+
 sub TO_JSON {
     my $self = shift;
 
@@ -165,16 +179,28 @@ If this item contains more than one such value, this will also emit a warning.
 
 Returns the special C<value> attribute, if this item has it defined.
 
-=head3 types
+=head3 all_types
 
- $types_ref = $item->types;
+ my @types = $item->all_types;
+ # Returns e.g. ( 'h-org', 'h-card' )
 
-Returns a list reference to all the types that this item identifies as.
+ my @short_types = $item->all_types( no_prefixes =>  1 );
+ # Returns e.g. ( 'org', 'card' )
+
+Returns a list of all the types that this item identifies as.
 Guaranteed to contain at least one value.
 
-Note that each member of the list is the type without its original
-prefix, so e.g. "entry" and "card" and not "h-entry" and "h-card".
-I<This behavior might change in near-future versions.>
+Takes an argument hash, which recognizes the following single key:
+
+=over
+
+=item no_prefixes
+
+If set to a true value, then this object will remove the prefixes from
+the list of item types before returning it to you. Practically speaking,
+this means that it will remove the leading C<h-> from every type.
+
+=back
 
 =head3 has_type
 
