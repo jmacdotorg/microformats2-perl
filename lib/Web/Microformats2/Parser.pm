@@ -25,10 +25,12 @@ has 'url_context' => (
 
 sub parse {
     my $self = shift;
+    my ( $html, %args ) = @_;
 
     $self->_clear;
-
-    my ( $html ) = @_;
+    if ( $args{ url_context } ) {
+        $self->url_context( $args{url_context} );
+    }
 
     my $tree = HTML::TreeBuilder::XPath->new;
     $tree->ignore_unknown( 0 );
@@ -574,10 +576,26 @@ Returns a parser object.
 
 =head3 parse
 
- $doc = $parser->parse( $html );
+ $doc = $parser->parse( $html, %args );
 
 Pass in a string containing HTML which itself contains Microformats2
 metadata, and receive a L<Web::Microformats2::Document> object in return.
+
+The optional args hash recognizes the following keys:
+
+=over
+
+=item url_context
+
+A L<URI> object or URI-shaped string that will be used as a context for
+transforming all relative URL properties encountered within MF2 tags
+into absolute URLs.
+
+The default value is C<http://example.com>, so you'll probably want to
+set this to something more interesting, such as the absolute URL of the
+HTML that we are parsing.
+
+=back
 
 =head1 AUTHOR
 
