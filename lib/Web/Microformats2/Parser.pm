@@ -91,15 +91,15 @@ sub analyze_element {
                         $self->_seek_value_class_pattern( $element );
                     if ( @$vcp_fragments_ref ) {
                         $current_item->add_property(
-                            $property,
+                            "p-$property",
                             join q{}, @$vcp_fragments_ref,
                         )
                     }
                     elsif ( my $alt = $element->findvalue( './@title|@value|@alt' ) ) {
-                        $current_item->add_property( $property, $alt );
+                        $current_item->add_property( "p-$property", $alt );
                     }
                     elsif ( my $text = _trim( decode_entities($element->as_text) ) ) {
-                        $current_item->add_property( $property, $text );
+                        $current_item->add_property( "p-$property", $text );
                     }
                 }
             }
@@ -117,20 +117,20 @@ sub analyze_element {
                     my $vcp_fragments_ref =
                         $self->_seek_value_class_pattern( $element );
                     if ( my $url = $self->_tease_out_url( $element ) ) {
-                        $current_item->add_property( $property, $url );
+                        $current_item->add_property( "u-$property", $url );
                     }
                     elsif ( @$vcp_fragments_ref ) {
                         $current_item->add_property(
-                            $property,
+                            "u-$property",
                             join q{}, @$vcp_fragments_ref,
                         )
                     }
                     elsif ( $url = $self->_tease_out_unlikely_url($element)) {
-                        $current_item->add_property( $property, $url );
+                        $current_item->add_property( "u-$property", $url );
                     }
                     else {
                         $current_item->add_property(
-                            $property,
+                            "u-$property",
                             _trim( $element->as_text ),
                         );
                     }
@@ -173,7 +173,7 @@ sub analyze_element {
                 # all other trailing whitespace stays. Shrug.
                 $e_data{ html } =~ s/ +$//;
 
-                $current_item->add_property( $property, \%e_data );
+                $current_item->add_property( "e-$property", \%e_data );
             }
         }
         elsif ( $mf2_type eq 'dt' ) {
@@ -203,7 +203,7 @@ sub analyze_element {
                     # XXX Needs to check for & set timezone offset
                     my $format = '%Y-%m-%d %H:%M:%S';
                     $current_item->add_property(
-                        $property,
+                        "dt-$property",
                         $dt->strftime( $format ),
                     );
                 }
@@ -238,12 +238,13 @@ sub analyze_element {
         # Put this onto the parent item's property-list, or its children-list,
         # depending on context.
         my $item_property;
+        my $prefix;
         if (
             $current_item
-            && ( $item_property = $mf2_attrs->{p}->[0] )
-            || ( $item_property = $mf2_attrs->{u}->[0] )
+            && ( ( $item_property = $mf2_attrs->{p}->[0]) && ($prefix = 'p') )
+            || ( ( $item_property = $mf2_attrs->{u}->[0]) && ($prefix = 'u') )
         ) {
-            $current_item->add_property( $item_property, $new_item );
+            $current_item->add_property( "$prefix-$item_property", $new_item );
         }
         elsif ($current_item) {
             $current_item->add_child ( $new_item );
@@ -333,7 +334,9 @@ sub _set_implied_name {
     my $self = shift;
     my ( $item, $element ) = @_;
 
-    return if $item->has_properties;
+    my $types = $item->types;
+
+    return if $item->has_p_properties || $item->has_e_properties;
 
     my $xpath;
     my $name;
@@ -383,7 +386,7 @@ sub _set_implied_name {
     }
 
     if ( length $name > 0 ) {
-         $item->add_property( 'name', $name );
+         $item->add_property( 'p-name', $name );
     }
 
 }
@@ -425,7 +428,7 @@ sub _set_implied_photo {
 
     if ( defined $url ) {
         $url = URI->new_abs( $url, $self->url_context )->as_string;
-        $item->add_property( 'photo', $url );
+        $item->add_property( 'u-photo', $url );
     }
 
 }
@@ -457,7 +460,7 @@ sub _set_implied_url {
 
     if ( defined $url ) {
         $url = URI->new_abs( $url, $self->url_context )->as_string;
-        $item->add_property( 'url', $url );
+        $item->add_property( 'u-url', $url );
     }
 
 }

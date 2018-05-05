@@ -108,7 +108,7 @@ sub _inflate_item {
             if ( ref( $property_value ) ) {
                 $property_value = $class->_inflate_item( $property_value );
             }
-            $item->add_property( $property, $property_value );
+            $item->add_base_property( $property, $property_value );
         }
     }
 
