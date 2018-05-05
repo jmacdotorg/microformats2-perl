@@ -239,7 +239,8 @@ sub analyze_element {
         # depending on context.
         my $item_property;
         if (
-            ( $item_property = $mf2_attrs->{p}->[0] )
+            $current_item
+            && ( $item_property = $mf2_attrs->{p}->[0] )
             || ( $item_property = $mf2_attrs->{u}->[0] )
         ) {
             $current_item->add_property( $item_property, $new_item );
