@@ -243,8 +243,11 @@ sub analyze_element {
         my $prefix;
         if (
             $current_item
-            && ( ( $item_property = $mf2_attrs->{p}->[0]) && ($prefix = 'p') )
-            || ( ( $item_property = $mf2_attrs->{u}->[0]) && ($prefix = 'u') )
+            && (
+                ( ( $item_property = $mf2_attrs->{p}->[0]) && ($prefix = 'p') )
+                ||
+                ( ( $item_property = $mf2_attrs->{u}->[0]) && ($prefix = 'u') )
+            )
         ) {
             $current_item->add_property( "$prefix-$item_property", $new_item );
         }
