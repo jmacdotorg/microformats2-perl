@@ -18,9 +18,6 @@ my %TODO_TESTS =
           'h-recipe' => [
                           'all'
                         ],
-          'h-entry' => [
-                         'impliedvalue-nested'
-                       ],
           'h-product' => [
                            'simpleproperties',
                            'aggregate'
