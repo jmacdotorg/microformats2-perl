@@ -3,7 +3,7 @@ package Web::Microformats2;
 use Web::Microformats2::Parser;
 use Web::Microformats2::Document;
 
-our $VERSION = '0.02';
+our $VERSION = '0.3';
 
 1;
 
