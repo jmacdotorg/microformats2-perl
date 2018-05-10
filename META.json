@@ -74,7 +74,7 @@
          "web" : "https://github.com/jmacdotorg/microformats2-perl"
       }
    },
-   "version" : "0.02",
+   "version" : "0.3",
    "x_contributors" : [
       "Jason McIntosh <jmac@jmac.org>"
    ],
