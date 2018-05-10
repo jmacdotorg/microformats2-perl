@@ -2,6 +2,8 @@ Revision history for Web::Microformats2
 
 {{$NEXT}}
 
+0.3 2018-05-10T04:15:48Z
+
     - Miscellaneous minor documentation and testing improvements.
 
     - Improved working with UTF-8 documents.
