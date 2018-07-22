@@ -44,12 +44,8 @@ my %TODO_TESTS =
                           'item'
                         ],
           'h-event' => [
-                         'dt-property',
-                         'combining',
                          'time',
                          'concatenate',
-                         'ampm',
-                         'attendees',
                          'dates'
                        ],
           'h-review-aggregate' => [
