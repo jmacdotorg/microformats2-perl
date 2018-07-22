@@ -34,9 +34,7 @@ my %TODO_TESTS =
                           'vcard',
                         ],
           'h-event' => [
-                         'time',
                          'concatenate',
-                         'dates'
                        ],
 );
 
