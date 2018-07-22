@@ -10,11 +10,6 @@ use JSON;
 #              that day is not today.
 my %TODO_TESTS =
 (
-          'h-geo' => [
-                       'abbrpattern',
-                       'valuetitleclass',
-                       'hidden'
-                     ],
           'h-recipe' => [
                           'all'
                         ],
@@ -35,24 +30,14 @@ my %TODO_TESTS =
                           'work',
                           'education'
                         ],
-          'h-adr' => [
-                       'simpleproperties'
-                     ],
           'h-review' => [
                           'vcard',
-                          'implieditem',
-                          'item'
                         ],
           'h-event' => [
                          'time',
                          'concatenate',
                          'dates'
                        ],
-          'h-review-aggregate' => [
-                                    'simpleproperties',
-                                    'justahyperlink',
-                                    'hevent'
-                                  ],
 );
 
 use_ok ("Web::Microformats2");
