@@ -3,7 +3,7 @@ package Web::Microformats2;
 use Web::Microformats2::Parser;
 use Web::Microformats2::Document;
 
-our $VERSION = '0.4';
+our $VERSION = '0.401';
 
 1;
 
@@ -81,11 +81,10 @@ software is currently being "dogfooded" on an experimental branch of the
 author's own essay blog.
 
 Further, the parser implementation is incomplete. The HTML and JSON
-documents found in t/microformats-v2 include the full Microformats2
+documents found in t/microformats-v2 are based on the full Microformats2
 parser test suite found at L<https://github.com/microformats/tests>, as
-of early April, 2018. The parser-test program in t/parser.pl marks a
-great deal of these tests as TODO. (But fewer than half of them, for all
-that, so hey.)
+of mid-2018, and this library currently passes around 80 percent of
+them.
 
 =head1 ABOUT MICROFORMATS2
 
