@@ -10,15 +10,6 @@ use JSON;
 #              that day is not today.
 my %TODO_TESTS =
 (
-          'rel' => [
-                     'duplicate-rels',
-                     'xfn-all',
-                     'license',
-                     'nofollow',
-                     'varying-text-duplicate-rels',
-                     'xfn-elsewhere',
-                     'rel-urls'
-                   ],
           'h-review' => [
                           'vcard',
                         ],

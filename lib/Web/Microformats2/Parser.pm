@@ -56,11 +56,14 @@ sub parse {
 
 # analyze_element: Recursive method that scans an element for new microformat
 # definitions (h-*) or properties (u|dt|e|p-*) and then does the right thing.
+# It also builds up the MF2 document's rels and rel-urls as it goes.
 sub analyze_element {
     my $self = shift;
     my ( $document, $element, $current_item ) = @_;
 
     return unless blessed( $element) && $element->isa( 'HTML::Element' );
+
+    $self->_add_element_rels_to_mf2_document( $element, $document );
 
     my $mf2_attrs = $self->_tease_out_mf2_attrs( $element );
 
@@ -638,6 +641,41 @@ sub _parse_property_value {
     }
 
     return $value;
+}
+
+sub _add_element_rels_to_mf2_document {
+    my ( $self, $element, $document ) = @_;
+
+    return unless $element->tag =~ /^(a|link)$/;
+
+    my $rel = $element->attr( 'rel' );
+    return unless defined $rel;
+
+    my $href = $element->attr( 'href' );
+    my $url = URI->new_abs( $href, $self->url_context)->as_string;
+
+    my @rels = split /\s+/, $rel;
+    for my $rel ( @rels ) {
+        $document->add_rel( $rel, $url );
+    }
+
+    my $rel_url_value = {};
+    foreach (qw( hreflang media title type ) ) {
+        next if defined $rel_url_value->{ $_ };
+        my $value = $element->attr( $_ );
+        if ( defined $value ) {
+            $rel_url_value->{ $_ } = $value;
+        }
+    }
+    my $text = ($element->as_text);
+    if ( defined $text ) {
+        $rel_url_value->{ text } = $text;
+    }
+
+    $rel_url_value->{ rels } = \@rels;
+
+    $document->add_rel_url( $url, $rel_url_value );
+
 }
 
 1;
