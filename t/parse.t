@@ -10,13 +10,6 @@ use JSON;
 #              that day is not today.
 my %TODO_TESTS =
 (
-          'h-recipe' => [
-                          'all'
-                        ],
-          'h-product' => [
-                           'simpleproperties',
-                           'aggregate'
-                         ],
           'rel' => [
                      'duplicate-rels',
                      'xfn-all',
@@ -26,10 +19,6 @@ my %TODO_TESTS =
                      'xfn-elsewhere',
                      'rel-urls'
                    ],
-          'h-resume' => [
-                          'work',
-                          'education'
-                        ],
           'h-review' => [
                           'vcard',
                         ],

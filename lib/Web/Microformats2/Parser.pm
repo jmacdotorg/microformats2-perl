@@ -89,19 +89,12 @@ sub analyze_element {
             # this property name.)
             unless ( $new_item ) {
                 for my $property ( @$properties_ref ) {
-                    my $vcp_fragments_ref =
-                        $self->_seek_value_class_pattern( $element );
-                    if ( @$vcp_fragments_ref ) {
+                    my $value = $self->_parse_property_value( $element );
+                    if ( defined $value ) {
                         $current_item->add_property(
                             "p-$property",
-                            join q{}, @$vcp_fragments_ref,
-                        )
-                    }
-                    elsif ( my $alt = $element->findvalue( './@title|@value|@alt' ) ) {
-                        $current_item->add_property( "p-$property", $alt );
-                    }
-                    elsif ( my $text = _trim( decode_entities($element->as_text) ) ) {
-                        $current_item->add_property( "p-$property", $text );
+                            $value,
+                        );
                     }
                 }
             }
@@ -222,12 +215,20 @@ sub analyze_element {
 
         # Now add a "value" attribute to this new item, if appropriate,
         # according to the MF2 spec.
+        my $value_attribute;
         if ( $mf2_attrs->{p}->[0] ) {
-            $new_item->value( $new_item->get_properties('name')->[0] );
+            if ( my $name = $new_item->get_properties('name')->[0] ) {
+                $value_attribute = $name;
+            }
+            else {
+                $value_attribute = $self->_parse_property_value( $element );
+            }
         }
         elsif ( $mf2_attrs->{u}->[0] ) {
-            $new_item->value( $new_item->get_properties('url')->[0] );
+            $value_attribute = $new_item->get_properties('url')->[0];
         }
+
+        $new_item->value( $value_attribute ) if defined ($value_attribute);
 
         # Put this onto the parent item's property-list, or its children-list,
         # depending on context.
@@ -617,6 +618,26 @@ sub _format_datetime {
     }
 
     return $dt->strftime( $format );
+}
+
+sub _parse_property_value {
+    my ( $self, $element ) = @_;
+
+    my $value;
+
+    my $vcp_fragments_ref =
+        $self->_seek_value_class_pattern( $element );
+    if ( @$vcp_fragments_ref ) {
+        $value = join q{}, @$vcp_fragments_ref;
+    }
+    elsif ( my $alt = $element->findvalue( './@title|@value|@alt' ) ) {
+        $value = $alt;
+    }
+    elsif ( my $text = _trim( decode_entities($element->as_text) ) ) {
+        $value = $text;
+    }
+
+    return $value;
 }
 
 1;
