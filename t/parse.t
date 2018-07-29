@@ -10,9 +10,6 @@ use JSON;
 #              that day is not today.
 my %TODO_TESTS =
 (
-          'h-review' => [
-                          'vcard',
-                        ],
           'h-event' => [
                          'concatenate',
                        ],
