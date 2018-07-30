@@ -73,7 +73,11 @@ sub new_from_json {
 
     my $data_ref = decode_json (encode_utf8($json));
 
-    my $document = $class->new;
+    my $document = $class->new(
+        rels => $data_ref->{rels} || {},
+        rel_urls => $data_ref->{rel_urls} || {},
+    );
+
     for my $deflated_item ( @{ $data_ref->{items} } ) {
         my $item = $class->_inflate_item( $deflated_item );
         $document->add_top_level_item( $item );
