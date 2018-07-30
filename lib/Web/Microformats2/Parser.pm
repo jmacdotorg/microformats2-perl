@@ -338,7 +338,7 @@ sub _set_implied_name {
 
     my $types = $item->types;
 
-    return if $item->has_p_properties || $item->has_e_properties;
+    return if $item->has_properties || $item->has_children;
 
     my $xpath;
     my $name;

@@ -69,6 +69,7 @@ has 'children' => (
     traits => ['Array'],
     handles => {
         add_child => 'push',
+        has_children => 'count',
     },
 );
 

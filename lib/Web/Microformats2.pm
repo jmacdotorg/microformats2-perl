@@ -45,7 +45,7 @@ it as a queryable in-memory object. They can also serialize this object
 as JSON (using the Microformats2 rules for this), or read an already
 JSON-serialized Microformats2 structure for further analysis.
 
-See L<"ABOUT MICROFORMATS">, below, for arguments about why this might
+See L<"ABOUT MICROFORMATS2">, below, for arguments about why this might
 be interesting to you.
 
 =head1 CLASSES

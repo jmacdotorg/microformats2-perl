@@ -4,7 +4,9 @@ Revision history for Web::Microformats2
 
     - Added support for parsing and presenting "rel" attributes.
     
-    - Improved support for implied microformat "value" data.
+    - Improved rendering of implied "value" data.
+    
+    - Improved rendering of implied "name" properties.
     
     - Added partial support for implied dates (regarding parsed datetime
     properties that specify a time but no date).
