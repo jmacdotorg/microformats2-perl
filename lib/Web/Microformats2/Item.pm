@@ -88,6 +88,11 @@ has 'value' => (
     isa => 'Maybe[Str]',
 );
 
+has 'last_seen_date' => (
+    is => 'rw',
+    isa => 'Maybe[DateTime]',
+);
+
 sub add_property {
     my $self = shift;
 

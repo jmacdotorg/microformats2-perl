@@ -8,6 +8,7 @@ use v5.10;
 use Scalar::Util;
 use JSON;
 use DateTime::Format::ISO8601;
+use Carp;
 
 use Web::Microformats2::Item;
 use Web::Microformats2::Document;
@@ -183,7 +184,7 @@ sub analyze_element {
                 my $vcp_fragments_ref =
                     $self->_seek_value_class_pattern( $element );
                 if ( @$vcp_fragments_ref ) {
-                    $dt_string = $self->_format_datetime(join q{T}, @$vcp_fragments_ref);
+                    $dt_string = $self->_format_datetime(join (q{T}, @$vcp_fragments_ref), $current_item);
                 }
                 elsif ( my $alt = $element->findvalue( './@datetime|@title|@value' ) ) {
                     $dt_string = $alt;
@@ -551,7 +552,7 @@ sub _trim {
 }
 
 sub _format_datetime {
-    my ($self, $dt_string) = @_;
+    my ($self, $dt_string, $current_item) = @_;
 
     my $dt;
 
@@ -560,7 +561,7 @@ sub _format_datetime {
 
     $dt_string =~ s/t/T/;
 
-    # XXX Will have to come back to this...
+    # Note presence of AM/PM, but toss it out of the string.
     $dt_string =~ s/((?:a|p)\.?m\.?)//i;
     my $am_or_pm = $1 || '';
 
@@ -589,12 +590,31 @@ sub _format_datetime {
     # Treat a space separator between date & time as a 'T'.
     $dt_string =~ s/ /T/;
 
+    # If this is a time with no date, try to apply a previously-seen
+    # date to it.
+    my $date_is_defined = 1;
+    if ( $dt_string =~ /^\d\d:/ ) {
+        if ( my $previous_dt = $current_item->last_seen_date ) {
+            $dt_string = $previous_dt->ymd . "T$dt_string";
+        }
+        else {
+            $date_is_defined = 0;
+            carp "Encountered a value-class datetime with only a time, "
+                 . "no date, and no date defined earlier. Results may "
+                 . "not be what you expect. (Data: $dt_string)";
+        }
+    }
+
     eval {
     $dt = DateTime::Format::ISO8601->new
               ->parse_datetime( $dt_string );
     };
 
     return if $@;
+
+    if ($date_is_defined) {
+        $current_item->last_seen_date( $dt );
+    }
 
     if ($am_or_pm =~ /^[pP]/) {
         # There was a 'pm' specified, so add 12 hours.
