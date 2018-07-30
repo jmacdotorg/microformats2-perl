@@ -46,6 +46,7 @@
             "HTML::Entities" : "0",
             "HTML::TreeBuilder::XPath" : "0",
             "JSON" : "0",
+            "List::Util" : "0",
             "Moose" : "0",
             "MooseX::Types::URI" : "0",
             "Readonly" : "0",
@@ -74,7 +75,7 @@
          "web" : "https://github.com/jmacdotorg/microformats2-perl"
       }
    },
-   "version" : "0.401",
+   "version" : "0.5",
    "x_contributors" : [
       "Jason McIntosh <jmac@jmac.org>"
    ],
