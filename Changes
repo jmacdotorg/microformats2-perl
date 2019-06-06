@@ -13,9 +13,8 @@ Revision history for Web::Microformats2
     - Added partial support for implied dates (regarding parsed datetime
     properties that specify a time but no date).
     
-    - All 74 of the official Microformats2 tests pass now -- or slightly
-    updated versions of them, anyway -- so removed all the TODO stuff
-    from the test suite.
+    - All 73 of the official Microformats2 tests pass now, so I removed
+    all the TODO stuff from the test suite.
 
 0.401 2018-07-23T11:59:13Z
 

@@ -118,7 +118,8 @@ user-definable labels for metadata items and their constituent
 properties.
 
 For more information about Microformats2, please see
-L<http://microformats.org/wiki/microformats2>.
+L<https://microformats.io>. For a deep dive into the MF2 specification,
+see L<http://microformats.org/wiki/microformats2>.
 
 =head1 SUPPORT
 
