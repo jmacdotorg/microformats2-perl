@@ -4,7 +4,7 @@
       "Jason McIntosh (jmac@jmac.org)"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v3.0.17, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Minilla/v3.1.2, CPAN::Meta::Converter version 2.150005",
    "license" : [
       "mit"
    ],
@@ -75,9 +75,10 @@
          "web" : "https://github.com/jmacdotorg/microformats2-perl"
       }
    },
-   "version" : "0.5",
+   "version" : "0.501",
    "x_contributors" : [
       "Jason McIntosh <jmac@jmac.org>"
    ],
-   "x_serialization_backend" : "JSON::PP version 2.27300_01"
+   "x_serialization_backend" : "JSON::PP version 2.27300_01",
+   "x_static_install" : 1
 }
