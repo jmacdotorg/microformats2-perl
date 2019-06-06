@@ -217,36 +217,42 @@ sub analyze_element {
             }
         }
 
-        # Now add a "value" attribute to this new item, if appropriate,
-        # according to the MF2 spec.
-        my $value_attribute;
-        if ( $mf2_attrs->{p}->[0] ) {
-            if ( my $name = $new_item->get_properties('name')->[0] ) {
-                $value_attribute = $name;
-            }
-            else {
-                $value_attribute = $self->_parse_property_value( $element );
-            }
-        }
-        elsif ( $mf2_attrs->{u}->[0] ) {
-            $value_attribute = $new_item->get_properties('url')->[0];
-        }
-
-        $new_item->value( $value_attribute ) if defined ($value_attribute);
-
         # Put this onto the parent item's property-list, or its children-list,
         # depending on context.
-        my $item_property;
-        my $prefix;
-        if (
-            $current_item
-            && (
-                ( ( $item_property = $mf2_attrs->{p}->[0]) && ($prefix = 'p') )
-                ||
-                ( ( $item_property = $mf2_attrs->{u}->[0]) && ($prefix = 'u') )
-            )
-        ) {
-            $current_item->add_property( "$prefix-$item_property", $new_item );
+        my @item_properties;
+        for my $prefix (qw( u p ) ) {
+            push @item_properties, map { "$prefix-$_" } @{ $mf2_attrs->{$prefix} };
+        }
+        if ( $current_item && @item_properties ) {
+            for my $item_property ( @item_properties ) {
+                # We place a clone of the new item into the current item's
+                # property list, rather than the item itself. This allows for
+                # edge cases where the same item needs to go under multiple
+                # properties, but carry different 'value' attributes.
+                my $cloned_new_item =
+                    bless { %$new_item }, ref $new_item;
+
+                $current_item
+                    ->add_property( "$item_property", $cloned_new_item );
+
+                # Now add a "value" attribute to this new item, if appropriate,
+                # according to the MF2 spec.
+                my $value_attribute;
+                if ( $item_property =~ /^p-/ ) {
+                    if ( my $name = $new_item->get_properties('name')->[0] ) {
+                        $value_attribute = $name;
+                    }
+                    else {
+                        $value_attribute =
+                            $self->_parse_property_value( $element );
+                    }
+                }
+                elsif ( $item_property =~ /^u-/ ) {
+                    $value_attribute = $new_item->get_properties('url')->[0];
+                }
+
+                $cloned_new_item->value( $value_attribute ) if defined ($value_attribute);
+            }
         }
         elsif ($current_item) {
             $current_item->add_child ( $new_item );
