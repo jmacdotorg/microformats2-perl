@@ -2,6 +2,11 @@ Revision history for Web::Microformats2
 
 {{$NEXT}}
 
+    - Parser no longer dies when resolving malformed or legacy URLs, such as
+      pre-RFC-5870 "geo:" URIs that URI::geo (bundled with URI 5.28+) rejects.
+      Unresolvable URLs now fall back to their raw string instead of aborting
+      the parse of the whole document. (GitHub issues #5 and #6.)
+
 0.511 2020-06-08T23:19:37Z
 
     - Adding a dependency whose lack causes some tests to fail. Thanks to Mohammad S Anwar for the patch.
