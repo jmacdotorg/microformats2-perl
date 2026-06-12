@@ -154,7 +154,7 @@ sub analyze_element {
                             foreach ( qw( href src ) ) {
                                 my $url = $href_element->attr($_);
                                 if ( $url ) {
-                                    my $abs_url = URI->new_abs( $url, $self->url_context)->as_string;
+                                    my $abs_url = $self->_resolve_url( $url );
                                     $href_element->attr( $_=> $abs_url );
                                 }
                             }
@@ -313,10 +313,22 @@ sub _tease_out_url {
     }
 
     if ( defined $url ) {
-        $url = URI->new_abs( $url, $self->url_context )->as_string;
+        $url = $self->_resolve_url( $url );
     }
 
     return $url;
+}
+
+# _resolve_url: Resolve a URL against the document's base URL, falling back to
+# the raw string if URI's scheme-specific parsing dies (e.g. URI::geo, bundled
+# with URI 5.28+, rejecting non-RFC-5870 geo: URIs). A single malformed URL
+# must not abort the parse of the whole document.
+sub _resolve_url {
+    my $self = shift;
+    my ( $url ) = @_;
+
+    my $absolute = eval { URI->new_abs( $url, $self->url_context )->as_string };
+    return defined $absolute ? $absolute : $url;
 }
 
 sub _tease_out_unlikely_url {
@@ -436,7 +448,7 @@ sub _set_implied_photo {
     }
 
     if ( defined $url ) {
-        $url = URI->new_abs( $url, $self->url_context )->as_string;
+        $url = $self->_resolve_url( $url );
         $item->add_property( 'u-photo', $url );
     }
 
@@ -468,7 +480,7 @@ sub _set_implied_url {
     }
 
     if ( defined $url ) {
-        $url = URI->new_abs( $url, $self->url_context )->as_string;
+        $url = $self->_resolve_url( $url );
         $item->add_property( 'u-url', $url );
     }
 
@@ -679,7 +691,7 @@ sub _add_element_rels_to_mf2_document {
     return unless defined $rel;
 
     my $href = $element->attr( 'href' );
-    my $url = URI->new_abs( $href, $self->url_context)->as_string;
+    my $url = $self->_resolve_url( $href );
 
     my @rels = split /\s+/, $rel;
     for my $rel ( @rels ) {
