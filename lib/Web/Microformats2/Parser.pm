@@ -6,15 +6,12 @@ use HTML::TreeBuilder::XPath;
 use HTML::Entities;
 use v5.10;
 use Scalar::Util qw(blessed);
-use JSON;
 use DateTime::Format::ISO8601;
 use URI;
 use Carp;
 
 use Web::Microformats2::Item;
 use Web::Microformats2::Document;
-
-use Readonly;
 
 has 'url_context' => (
     is => 'rw',
@@ -40,10 +37,17 @@ sub parse {
     $tree->ignore_ignorable_whitespace( 0 );
     $tree->no_expand_entities( 1 );
 
-    # Adding HTML5 elements because it's 2018.
-    foreach (qw(article aside details figcaption figure footer header main mark nav section summary time)) {
-        $HTML::TreeBuilder::isBodyElement{$_}=1;
-    }
+    # Teach HTML::TreeBuilder about HTML5 elements so it treats them as body
+    # content. Scope this with `local` so the parse doesn't permanently mutate
+    # the package global for everyone else using HTML::TreeBuilder in this
+    # process; the override stays in effect for the dynamic extent of parse().
+    local %HTML::TreeBuilder::isBodyElement = (
+        %HTML::TreeBuilder::isBodyElement,
+        map { $_ => 1 } qw(
+            article aside details figcaption figure footer header main
+            mark nav section summary time
+        ),
+    );
 
     $tree->parse( $html );
 
