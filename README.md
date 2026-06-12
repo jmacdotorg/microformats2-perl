@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jmacdotorg/microformats2-perl.svg?branch=master)](https://travis-ci.org/jmacdotorg/microformats2-perl)
+[![CI](https://github.com/jmacdotorg/microformats2-perl/actions/workflows/ci.yml/badge.svg)](https://github.com/jmacdotorg/microformats2-perl/actions/workflows/ci.yml)
 # NAME
 
 Web::Microformats2 - Read Microformats2 metadata from HTML or JSON

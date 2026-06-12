@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        perl-version: ['5.34', '5.38']
+    container:
+      image: perl:${{ matrix.perl-version }}
+    name: Perl ${{ matrix.perl-version }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Perl version
+        run: perl -V
+      - name: Install dependencies
+        run: cpanm --notest --installdeps .
+      - name: Run tests
+        run: prove -lv t/
