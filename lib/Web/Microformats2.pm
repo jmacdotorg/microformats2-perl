@@ -102,7 +102,7 @@ exists quietly within the "class" attributes found within the HTML
 page's ordinary markup, its presence does not affect or interfere with
 the web page's rendering or readability to humans.
 
-A Microfomats2 parser can read these special attribute values --
+A Microformats2 parser can read these special attribute values --
 identifiable by their conspicuous use of prefixes, such as "h-entry" and
 "p-name" -- and turn them into data structures that use this metadata to
 give additional order, structure, and semantic labeling to the content

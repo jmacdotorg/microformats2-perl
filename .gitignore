@@ -17,3 +17,6 @@ nytprof.out
 *.bs
 /_eumm/
 _build_params
+
+# Minilla build artifacts (tarball + staging dir)
+/Web-Microformats2-*

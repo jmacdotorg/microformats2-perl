@@ -1,4 +1,4 @@
-[![CI](https://github.com/jmacdotorg/microformats2-perl/actions/workflows/ci.yml/badge.svg)](https://github.com/jmacdotorg/microformats2-perl/actions/workflows/ci.yml)
+[![Actions Status](https://github.com/jmacdotorg/microformats2-perl/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/jmacdotorg/microformats2-perl/actions?workflow=ci)
 # NAME
 
 Web::Microformats2 - Read Microformats2 metadata from HTML or JSON
@@ -40,18 +40,18 @@ be interesting to you.
 
 # CLASSES
 
-- [Web::Microformats2::Parser](https://metacpan.org/pod/Web::Microformats2::Parser)
+- [Web::Microformats2::Parser](https://metacpan.org/pod/Web%3A%3AMicroformats2%3A%3AParser)
 
     Parses HTML for Microformats2 metadata. Returns what it finds as a
     Web::Microformats2::Document object.
 
-- [Web::Microformats2::Document](https://metacpan.org/pod/Web::Microformats2::Document)
+- [Web::Microformats2::Document](https://metacpan.org/pod/Web%3A%3AMicroformats2%3A%3ADocument)
 
     Objects are queryable structures of parsed Microformats2 metadata. Each
     came either fresh from HTML, or re-inflated from its JSON serialization
     format.
 
-- [Web::Microformats2::Item](https://metacpan.org/pod/Web::Microformats2::Item)
+- [Web::Microformats2::Item](https://metacpan.org/pod/Web%3A%3AMicroformats2%3A%3AItem)
 
     Each document object contains one or more objects of this class. Each
     item represents a single, "h-"prefixed microformat substructure,
@@ -88,7 +88,7 @@ exists quietly within the "class" attributes found within the HTML
 page's ordinary markup, its presence does not affect or interfere with
 the web page's rendering or readability to humans.
 
-A Microfomats2 parser can read these special attribute values --
+A Microformats2 parser can read these special attribute values --
 identifiable by their conspicuous use of prefixes, such as "h-entry" and
 "p-name" -- and turn them into data structures that use this metadata to
 give additional order, structure, and semantic labeling to the content
@@ -117,6 +117,10 @@ The author also welcomes any direct questions about this module via email.
 # AUTHOR
 
 Jason McIntosh (jmac@jmac.org)
+
+# CONTRIBUTORS
+
+Mohammad S Anwar (mohammad.anwar@yahoo.com)
 
 # COPYRIGHT AND LICENSE
 
